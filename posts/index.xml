@@ -1,0 +1,79 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Souzomain Blog</title>
+        <link>http://localhost:8080/posts/</link>
+        <description>Recent content in Posts on Souzomain Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+        <lastBuildDate>Thu, 08 Feb 2024 11:01:12 -0300</lastBuildDate>
+        <atom:link href="http://localhost:8080/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Como Alguns Sites Piratas Indexam Os Videos - Part 1</title>
+            <link>http://localhost:8080/posts/2024/02/como-alguns-sites-piratas-indexam-os-videos-part-1/</link>
+            <pubDate>Thu, 08 Feb 2024 11:01:12 -0300</pubDate>
+            
+            <guid>http://localhost:8080/posts/2024/02/como-alguns-sites-piratas-indexam-os-videos-part-1/</guid>
+            <description>Análisando um site pirata que carrega seu conteúdo por meio de XSS e exploração em wordpress.
+Em algum momento da sua vida você ja tentou entrar em algum site pirata, seja para assistir uma série, um filme ou um anime que voce gosta.
+Alguns dias atrás eu estava a procura de um anime que não conseguia encontrar em lugar nenhum, então fui atrás de um desses sites duvidosos na internet.</description>
+            <content type="html"><![CDATA[<p>Análisando um site pirata que carrega seu conteúdo por meio de XSS e exploração em wordpress.</p>
+<p>Em algum momento da sua vida você ja tentou entrar em algum site pirata, seja para assistir uma série, um filme ou um anime que voce gosta.</p>
+<p>Alguns dias atrás eu estava a procura de um anime que não conseguia encontrar em lugar nenhum, então fui atrás de um desses sites duvidosos na internet.</p>
+<p>Depois de uma boa pesquisada, consegui encontrar o site de animes que continha o que eu queria assistir. porém&hellip;</p>
+<p>Ao clicar para assistir me deparei com a seguinte situação:</p>
+<ul>
+<li>O site me redireciona para um site terceiro;</li>
+<li>O site terceiro me redireciona para outro site terceiro;</li>
+<li>O conteúdo é apresentado em um site totalmente diferente do anime.</li>
+</ul>
+<p>Exemplo:</p>
+<p><img src="images/img1.png" alt="Imagem 1"></p>
+<p>Reparem que o dominio do site não condiz com o dominio do anime, nem o título e nem o restante da URL, ou seja, está em um servidor totalmente diferente.
+Se você tentar entrar no mesmo url, o conteúdo será totalmente diferente.</p>
+<p>Caso você seja alguem que procura por sites alternativos como eu, ja deve ter se deparado com esse tipo de situação.</p>
+<p>Mas, após ver isso, fiquei com várias dúvidas</p>
+<ul>
+<li>Por que eles estão utilizando outro site?</li>
+<li>Como eles colocam um anime para iniciar em outro site?</li>
+<li>De onde vem o conteúdo?</li>
+</ul>
+<p>O site em questão que irei análisar é o <a href="https://animetvonline.cx">animetvonline</a></p>
+<h2 id="iniciando-a-análise">Iniciando a análise</h2>
+<hr>
+<p>Iniciando a análise dei uma verificada no código fonte para tentar obter o local do arquivo de carrega o site terceiro para entregar o vídeo.</p>
+<p>Encontrei o seguinte código da página:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://flufc.com.br/noticia.php?token=PGRpdiBpZD0iZW1iZWRfaG9sZGVyIiBjbGFzcz0ibG93dmlkIj48ZGl2IGNsYXNzPSJwbGF5ZXItZW1iZWQiIGlkPSJwZW1iZWQiPjxpZnJhbWUgc3JjPSJodHRwczovL2dlcmFkb3IubXlhbmltZXllcy5uZXQvdG9rZW4vZW1iZWQucGhwP2RhdGE9cTk2RjdqZHEyUUZkUmlUK1lhYUZDbXlaSHVlVERMQm5vanVscCtqWVFYWXorcXg5dUZ3ZzJpVjBaYUJYTWtBenYwK3FzY2RnQXFDbHVtQkx0ck1GcWR3ZEE2TFhLbmVaSmZXbnpRcHRaZk8rejVVdlM0UVR4VkZuVFFPTUJnMGE3S1V0Q2lQUTUwRGhkaVMwRFpkVThveXp1WURiOUJGM3JCRFk3RnZEWTJ3ZDU2TW5hdnowNGRURGZKajIzMDJvU0NIaEgvK1ZFNVYwOWtWTnBQYzQ0NENJeFI3QlhzNUVFZW1kYzJCeE9ob1ordGpTT0ZQUVFJeDlFczVyRmFZanV1a21RQ2QrVXZjWVlIbmxvRlRleTJqQ0NBYjVrTE1lMlhsSE1pSHBTR05xIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmcmFtZWJvcmRlcj0iMCIgYWxsb3dmdWxsc2NyZWVuPjwvaWZyYW1lPjwvZGl2PjwvZGl2PiA=&#34;</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ClassLink&#34;</span>&gt;
+</span></span></code></pre></div><p>Parece que o site pirata utiliza apenas um link para o site terceiro.</p>
+<p>Interessante se atentar que o site terceiro utilizado é o site do fluminence, como mostra a imagem abaixo.</p>
+<p><img src="images/img2.png" alt="Imagem 2: site do fluminence"></p>
+<!-- raw HTML omitted -->
+<p>Análisando o link vi que o site de animes está usando passando um &ldquo;token&rdquo; como parâmetro ao site tereceiro. Aparentemente o token contém um código base64.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PGRpdiBpZD0iZW1iZWRfaG9sZGVyIiBjbGFzcz0ibG93dmlkIj48ZGl2IGNsYXNzPSJwbGF5ZXItZW1iZWQiIGlkPSJwZW1iZWQiPjxpZnJhbWUgc3JjPSJodHRwczovL2dlcmFkb3IubXlhbmltZXllcy5uZXQvdG9rZW4vZW1iZWQucGhwP2RhdGE9cTk2RjdqZHEyUUZkUmlUK1lhYUZDbXlaSHVlVERMQm5vanVscCtqWVFYWXorcXg5dUZ3ZzJpVjBaYUJYTWtBenYwK3FzY2RnQXFDbHVtQkx0ck1GcWR3ZEE2TFhLbmVaSmZXbnpRcHRaZk8rejVVdlM0UVR4VkZuVFFPTUJnMGE3S1V0Q2lQUTUwRGhkaVMwRFpkVThveXp1WURiOUJGM3JCRFk3RnZEWTJ3ZDU2TW5hdnowNGRURGZKajIzMDJvU0NIaEgvK1ZFNVYwOWtWTnBQYzQ0NENJeFI3QlhzNUVFZW1kYzJCeE9ob1ordGpTT0ZQUVFJeDlFczVyRmFZanV1a21RQ2QrVXZjWVlIbmxvRlRleTJqQ0NBYjVrTE1lMlhsSE1pSHBTR05xIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmcmFtZWJvcmRlcj0iMCIgYWxsb3dmdWxsc2NyZWVuPjwvaWZyYW1lPjwvZGl2PjwvZGl2PiA<span style="color:#f92672">=</span>
+</span></span></code></pre></div><p>Ao decodificar o token base64, obtive o um código html.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;embed_holder&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lowvid&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;player-embed&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pembed&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://gerador.myanimeyes.net/token/embed.php?data=q96F7jdq2QFdRiT+YaaFCmyZHueTDLBnojulp+jYQXYz+qx9uFwg2iV0ZaBXMkAzv0+qscdgAqClumBLtrMFqdwdA6LXKneZJfWnzQptZfO+z5UvS4QTxVFnTQOMBg0a7KUtCiPQ50DhdiS0DZdU8oyzuYDb9BF3rBDY7FvDY2wd56Mnavz04dTDfJj2302oSCHhH/+VE5V09kVNpPc444CIxR7BXs5EEemdc2BxOhoZ+tjSOFPQQIx9Es5rFaYjuukmQCd+UvcYYHnloFTey2jCCAb5kLMe2XlHMiHpSGNq&#34;</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;100%&#34;</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">frameborder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">allowfullscreen</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">iframe</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><h3 id="o-que-isso-significa">O que isso significa?</h3>
+<hr>
+<p>Parece que estão explorando uma vulnerabilidade de XSS para poder carregar o seu conteúdo em um site terceiro.</p>
+<p>Para confirmar se há uma exploração, simplesmente criei um html e o transformei em base64.</p>
+<p><img src="images/img3.png" alt="Imagem 3: Criando um base64 simples"></p>
+<p>Após isso, basta colocar o código html gerado no parametro &ldquo;token&rdquo; e vualá!</p>
+<p><img src="images/img4.png" alt="Imagem 4: confirmando a exploração"></p>
+<p>A exploração foi confirmada, mas &hellip;</p>
+<p>Explorou em outro site? O dominio é diferente? Como assim???</p>
+<p>Fiquem atentos a parte 2 :)</p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>

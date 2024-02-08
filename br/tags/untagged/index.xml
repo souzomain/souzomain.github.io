@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>untagged on Souzomain Blog</title>
+    <link>http://localhost:8080/br/tags/untagged/</link>
+    <description>Recent content in untagged on Souzomain Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 08 Feb 2024 11:01:12 -0300</lastBuildDate>
+    <atom:link href="http://localhost:8080/br/tags/untagged/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Como Os Sites Piratas Indexam Os Videos</title>
+      <link>http://localhost:8080/br/posts/2024/02/como-os-sites-piratas-indexam-os-videos/</link>
+      <pubDate>Thu, 08 Feb 2024 11:01:12 -0300</pubDate>
+      <guid>http://localhost:8080/br/posts/2024/02/como-os-sites-piratas-indexam-os-videos/</guid>
+      <description>Teste</description>
+    </item>
+  </channel>
+</rss>
